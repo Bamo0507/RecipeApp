@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">RecipeApp</string>
+
+    <!-- Strings Used in Login -->
+    <string name="login">Login</string>
+    <string name="loginButton">Let\'s Cook!</string>
+    <string name="loginFooter">Your kitchen companion starts here!</string>
+    <string name="loginError">Oooops looks like you don\'t have the right credentials!</string>
 </resources>
