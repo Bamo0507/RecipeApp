@@ -20,4 +20,8 @@ interface RecipeDao {
     @Query("SELECT * FROM recipes WHERE id = :id")
     suspend fun getRecipeById(id: Int): RecipeEntity
 
+    //Update a recipe's favorite state
+    @Query("UPDATE recipes SET isFavorite = :isFavorite WHERE id = :id")
+    suspend fun updateFavoriteStatus(id: Int, isFavorite: Boolean)
+
 }

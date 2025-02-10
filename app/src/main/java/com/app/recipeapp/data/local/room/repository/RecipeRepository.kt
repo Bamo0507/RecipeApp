@@ -23,5 +23,10 @@ class RecipeRepository(context: Context) {
         return recipeDao.getRecipeById(id)
     }
 
+    //Method to update favorite state
+    suspend fun updateFavoriteStatus(id: Int, status: Boolean){
+        return recipeDao.updateFavoriteStatus(id, status)
+    }
+
 
 }

@@ -260,3 +260,19 @@ private fun loginScreenDarkPreview() {
         }
     }
 }
+
+@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+private fun loginScreenDarkErrorPreview() {
+    RecipeAppTheme(darkTheme = true) {
+        Surface {
+            loginScreen(
+                modifier = Modifier.fillMaxSize(),
+                state = LoginState(email = "", password = "", showError = true),
+                onNameChange = {},
+                onPasswordChange = {},
+                onLogIn = {}
+            )
+        }
+    }
+}
