@@ -6,4 +6,7 @@
     <string name="loginButton">Let\'s Cook!</string>
     <string name="loginFooter">Your kitchen companion starts here!</string>
     <string name="loginError">Oooops looks like you don\'t have the right credentials!</string>
+
+    <!-- Strings 4 the Loading Screen -->
+    <string name = "loading">Cooking up something delicious...</string>
 </resources>
