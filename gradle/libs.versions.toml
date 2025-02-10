@@ -44,6 +44,7 @@ androidx-room-runtime = { group = "androidx.room", name = "room-runtime", versio
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room"}
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
 
+coil-compose = { module = "io.coil-kt:coil-compose", version = "2.5.0" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

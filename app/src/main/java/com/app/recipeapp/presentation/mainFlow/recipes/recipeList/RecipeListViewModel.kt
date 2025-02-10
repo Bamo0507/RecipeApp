@@ -34,6 +34,7 @@ class RecipeListViewModel(
             // Map repository objects to your Recipe model
             val recipes = recipeListFromRepo.map {
                 Recipe(
+                    id = it.id,
                     title = it.title,
                     description = it.description,
                     prepTime = it.prepTime,
