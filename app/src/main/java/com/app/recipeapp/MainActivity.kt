@@ -1,5 +1,6 @@
 package com.app.recipeapp
 
+import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -11,37 +12,28 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.datastore.preferences.preferencesDataStore
+import androidx.navigation.compose.rememberNavController
+import com.app.recipeapp.data.local.preferences.DataStoreUserPrefs
+import com.app.recipeapp.presentation.navigation.AppNavigation
 import com.app.recipeapp.ui.theme.RecipeAppTheme
 
 class MainActivity : ComponentActivity() {
+    private val Context.dataStore by preferencesDataStore(name = "user_prefs")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val userPreferences = DataStoreUserPrefs(dataStore)
         enableEdgeToEdge()
         setContent {
+            val navController = rememberNavController()
             RecipeAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
+                    AppNavigation(
+                        navController = navController,
+                        userPreferences = userPreferences
                     )
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    RecipeAppTheme {
-        Greeting("Android")
     }
 }
