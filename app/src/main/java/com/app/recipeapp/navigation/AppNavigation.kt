@@ -1,4 +1,4 @@
-package com.app.recipeapp.presentation.navigation
+package com.app.recipeapp.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
@@ -8,6 +8,8 @@ import com.app.recipeapp.presentation.login.LoginDestination
 import com.app.recipeapp.presentation.login.loginScreen
 import com.app.recipeapp.presentation.mainFlow.recipes.recipeList.RecipeListDestination
 import com.app.recipeapp.presentation.mainFlow.recipes.recipesGraph
+import com.app.recipeapp.presentation.splash.SplashDestination
+import com.app.recipeapp.presentation.splash.splashScreen
 
 @Composable
 fun AppNavigation(
@@ -16,8 +18,12 @@ fun AppNavigation(
 ){
     NavHost(
         navController = navController,
-        startDestination = LoginDestination // Swith 2 splash once i have it
+        startDestination = SplashDestination
     ){
+        splashScreen(
+            navController = navController,
+            userPrefs= userPreferences
+        )
         loginScreen(
             onLoginClick = {
                 navController.navigate(RecipeListDestination) {
