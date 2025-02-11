@@ -280,7 +280,7 @@ fun RecipeGridItem(
                         recipe.imagePath.startsWith("content://") -> recipe.imagePath
                         else -> "file://${recipe.imagePath}"
                     },
-                    contentDescription = "Imagen seleccionada",
+                    contentDescription = "image selected",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .fillMaxWidth()

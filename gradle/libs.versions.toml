@@ -14,6 +14,7 @@ navigationCompose = "2.8.0-rc01"
 dataStore = "1.1.1"
 splashScreen = "1.0.1"
 room = "2.6.1"
+foundationAndroid = "1.6.6"
 
 
 [libraries]
@@ -45,6 +46,7 @@ androidx-room-compiler = { group = "androidx.room", name = "room-compiler", vers
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
 
 coil-compose = { module = "io.coil-kt:coil-compose", version = "2.5.0" }
+androidx-foundation-android = { group = "androidx.compose.foundation", name = "foundation-android", version.ref = "foundationAndroid" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

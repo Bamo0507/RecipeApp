@@ -1,9 +1,14 @@
 package com.app.recipeapp.presentation.mainFlow.recipes.recipeProfile
 
+import android.content.Context
+import android.os.Bundle
+import androidx.lifecycle.AbstractSavedStateViewModelFactory
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelStoreOwner
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
+import androidx.savedstate.SavedStateRegistryOwner
 import com.app.recipeapp.data.local.room.repository.RecipeRepository
 import com.app.recipeapp.data.model.Recipe
 import kotlinx.coroutines.delay
@@ -28,13 +33,6 @@ class RecipeProfileViewModel(
     //Retrieve info 4 Recipe
     fun getRecipeInfo(){
         viewModelScope.launch {
-            _uiState.update { state ->
-                state.copy(
-                    isLoading = true
-                )
-            }
-
-            delay(1500)
 
             val infoRecipeE = recipeRepository.getRecipeById(recipeProfile.recipeId)
 
@@ -51,8 +49,7 @@ class RecipeProfileViewModel(
             //update info
             _uiState.update { state ->
                 state.copy(
-                    recipe = infoRecipeM,
-                    isLoading = false
+                    recipe = infoRecipeM
                 )
             }
         }
@@ -73,9 +70,26 @@ class RecipeProfileViewModel(
                     _uiState.value.recipe!!.isFavorite)
             }
 
+            getRecipeInfo()
+
         }
     }
 
+    companion object{
+        class Factory(
+            private val context: Context,
+            owner: SavedStateRegistryOwner,
+            defaultArgs: Bundle?
+        ): AbstractSavedStateViewModelFactory(owner, defaultArgs){
+            @Suppress("UNCHECKED_CAST")
+            override fun <T: ViewModel> create(
+                key: String, modelClass: Class<T>, handle: SavedStateHandle
+            ): T {
+                val repository = RecipeRepository(context)
+                return RecipeProfileViewModel(repository, handle) as T
+            }
+        }
+    }
 
 
 

@@ -25,4 +25,7 @@
     <string name="recipeFav">Favorite</string>
     <string name="recipeImage">Select Image</string>
     <string name="recipeSave">Save Recipe</string>
+
+    <!-- Strings for recipe profile -->
+    <string name="descriptionProfile">Description</string>
 </resources>

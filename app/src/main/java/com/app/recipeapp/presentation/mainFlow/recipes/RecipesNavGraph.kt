@@ -8,6 +8,9 @@ import com.app.recipeapp.presentation.mainFlow.recipes.recipeForm.RecipeFormDest
 import com.app.recipeapp.presentation.mainFlow.recipes.recipeForm.recipeFormScreen
 import com.app.recipeapp.presentation.mainFlow.recipes.recipeList.RecipeListDestination
 import com.app.recipeapp.presentation.mainFlow.recipes.recipeList.recipeListScreen
+import com.app.recipeapp.presentation.mainFlow.recipes.recipeProfile.RecipeProfileDestination
+import com.app.recipeapp.presentation.mainFlow.recipes.recipeProfile.navigateToProfileScreen
+import com.app.recipeapp.presentation.mainFlow.recipes.recipeProfile.profileScreen
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -26,7 +29,13 @@ fun NavGraphBuilder.recipesGraph(
             onAddRecipeClick = {
                 navController.navigate(RecipeFormDestination)
             },
-            onRecipeClick = {},
+            onRecipeClick = { recipe ->
+                navController.navigateToProfileScreen(
+                    destination = RecipeProfileDestination(
+                        recipeId = recipe
+                    )
+                )
+            },
             onAccountClick = {},
         )
 
@@ -36,6 +45,13 @@ fun NavGraphBuilder.recipesGraph(
                 navController.navigateUp()
             },
             onRecipeSaved = {
+                navController.navigateUp()
+            }
+        )
+
+        //Recipe Profile
+        profileScreen(
+            onNavigateBack = {
                 navController.navigateUp()
             }
         )
