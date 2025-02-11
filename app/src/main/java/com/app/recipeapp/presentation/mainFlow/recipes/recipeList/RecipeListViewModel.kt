@@ -58,7 +58,7 @@ class RecipeListViewModel(
     fun updateFavorite(id: Int, favorite: Boolean) {
         viewModelScope.launch {
             recipeRepository.updateFavoriteStatus(id, favorite)
-            getAllRecipes() // Re-fetch recipes (which will also reapply filters)
+            getAllRecipes()
         }
     }
 
