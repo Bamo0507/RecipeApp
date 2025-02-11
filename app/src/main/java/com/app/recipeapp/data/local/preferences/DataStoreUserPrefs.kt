@@ -5,6 +5,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
@@ -14,6 +15,7 @@ class DataStoreUserPrefs(
 ): UserPreferences {
     private val nameKey = stringPreferencesKey("name")
     private val loggedKey = booleanPreferencesKey("logged")
+    private val logoAccountKey = stringPreferencesKey("logo")
 
     /*
     Functions to manage LOGGED state
@@ -47,6 +49,19 @@ class DataStoreUserPrefs(
     override suspend fun getUserName(): String? {
         return dataStore.data.map { preferences ->
             preferences[nameKey]
+        }.first()
+    }
+    /*
+    Functions to manage the account's logo
+     */
+    override suspend fun setLogoAccount(filepath: String) {
+        dataStore.edit { preferences ->
+            preferences[logoAccountKey] = filepath
+        }
+    }
+    override suspend fun getLogoAccount(): String? {
+        return dataStore.data.map { preferences ->
+            preferences[logoAccountKey]
         }.first()
     }
 }

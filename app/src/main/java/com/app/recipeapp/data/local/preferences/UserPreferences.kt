@@ -8,4 +8,6 @@ interface UserPreferences {
     fun loggedStatus(): Flow<Boolean>
     suspend fun setUserName(name: String)
     suspend fun getUserName(): String?
+    suspend fun setLogoAccount(filepath: String)
+    suspend fun getLogoAccount(): String?
 }
