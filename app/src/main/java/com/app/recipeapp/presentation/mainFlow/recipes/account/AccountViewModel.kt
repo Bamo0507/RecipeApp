@@ -1,7 +1,9 @@
 package com.app.recipeapp.presentation.mainFlow.recipes.account
 
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.app.recipeapp.data.local.preferences.UserPreferences
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -30,9 +32,10 @@ class AccountViewModel(
     fun getUserName(){
         viewModelScope.launch {
             val userName = userPreferences.getUserName()
+            Log.d("Account", "esto se guardo: ${userName}")
             _uiState.update { state ->
                 state.copy(
-                    userName = userName ?: "",
+                    userName = userName ?: "jj",
                     isLoading = false
                 )
             }
@@ -69,5 +72,14 @@ class AccountViewModel(
         }
     }
 
-
+    companion object {
+        class Factory(
+            private val userPreferences: UserPreferences
+        ): ViewModelProvider.Factory{
+            @Suppress("UNCHECKED_CAST")
+            override fun <T: ViewModel> create(modelClass: Class<T>): T {
+                return AccountViewModel(userPreferences) as T
+            }
+        }
+    }
 }

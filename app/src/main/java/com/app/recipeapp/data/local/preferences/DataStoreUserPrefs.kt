@@ -47,9 +47,8 @@ class DataStoreUserPrefs(
     }
 
     override suspend fun getUserName(): String? {
-        return dataStore.data.map { preferences ->
-            preferences[nameKey]
-        }.first()
+        val preferences = dataStore.data.first()
+        return preferences[nameKey]
     }
     /*
     Functions to manage the account's logo
@@ -60,8 +59,7 @@ class DataStoreUserPrefs(
         }
     }
     override suspend fun getLogoAccount(): String? {
-        return dataStore.data.map { preferences ->
-            preferences[logoAccountKey]
-        }.first()
+        val preferences = dataStore.data.first()
+        return  preferences[logoAccountKey]
     }
 }

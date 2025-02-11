@@ -28,4 +28,7 @@
 
     <!-- Strings for recipe profile -->
     <string name="descriptionProfile">Description</string>
+
+    <!-- Strings for logout screen -->
+    <string name="logoutScreen">Log Out</string>
 </resources>

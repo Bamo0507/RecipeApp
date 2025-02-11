@@ -123,7 +123,7 @@ fun RecipeListScreen(
                     }
                 },
                 actions = {
-                    IconButton(onClick = { onAccountClick }) {
+                    IconButton(onClick = { onAccountClick() }) {
                         Icon(
                             imageVector = Icons.Default.AccountCircle,
                             contentDescription = "Profile Icon",

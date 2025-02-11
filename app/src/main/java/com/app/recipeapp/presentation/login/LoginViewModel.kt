@@ -1,5 +1,6 @@
 package com.app.recipeapp.presentation.login
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -33,6 +34,8 @@ class LoginViewModel(
 
             if(loginRepository.login(_uiState.value.email, _uiState.value.password)){
                 userPreferences.setUserName(_uiState.value.email)
+                val username = _uiState.value.email
+                Log.d("LoginVM", "esto se envio ${username}")
                 userPreferences.logIn()
 
                 _uiState.update { state ->

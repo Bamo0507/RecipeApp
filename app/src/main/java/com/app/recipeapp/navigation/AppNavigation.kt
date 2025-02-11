@@ -19,7 +19,7 @@ fun AppNavigation(
 ){
     NavHost(
         navController = navController,
-        startDestination = RecipesNavGraph
+        startDestination = SplashDestination
     ){
         splashScreen(
             navController = navController,

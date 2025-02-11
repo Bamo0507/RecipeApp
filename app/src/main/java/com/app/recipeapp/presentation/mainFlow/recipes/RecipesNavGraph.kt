@@ -4,6 +4,8 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.navigation
 import com.app.recipeapp.data.local.preferences.UserPreferences
+import com.app.recipeapp.presentation.mainFlow.recipes.account.AccountDestination
+import com.app.recipeapp.presentation.mainFlow.recipes.account.accountscreen
 import com.app.recipeapp.presentation.mainFlow.recipes.recipeForm.RecipeFormDestination
 import com.app.recipeapp.presentation.mainFlow.recipes.recipeForm.recipeFormScreen
 import com.app.recipeapp.presentation.mainFlow.recipes.recipeList.RecipeListDestination
@@ -36,7 +38,9 @@ fun NavGraphBuilder.recipesGraph(
                     )
                 )
             },
-            onAccountClick = {},
+            onAccountClick = {
+                navController.navigate(AccountDestination)
+            },
         )
 
         //Form Screen
@@ -52,6 +56,15 @@ fun NavGraphBuilder.recipesGraph(
         //Recipe Profile
         profileScreen(
             onNavigateBack = {
+                navController.navigateUp()
+            }
+        )
+
+        //Account Screen
+        accountscreen(
+            onLogOutClick = onLogOutClick,
+            userPreferences = userPreferences,
+            onBackClick = {
                 navController.navigateUp()
             }
         )
