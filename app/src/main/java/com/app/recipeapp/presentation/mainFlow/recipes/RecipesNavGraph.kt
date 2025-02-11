@@ -4,6 +4,8 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.navigation
 import com.app.recipeapp.data.local.preferences.UserPreferences
+import com.app.recipeapp.presentation.mainFlow.recipes.recipeForm.RecipeFormDestination
+import com.app.recipeapp.presentation.mainFlow.recipes.recipeForm.recipeFormScreen
 import com.app.recipeapp.presentation.mainFlow.recipes.recipeList.RecipeListDestination
 import com.app.recipeapp.presentation.mainFlow.recipes.recipeList.recipeListScreen
 import kotlinx.serialization.Serializable
@@ -21,9 +23,21 @@ fun NavGraphBuilder.recipesGraph(
         //Recipe list
         recipeListScreen(
             //Pending
-            onAddRecipeClick = {},
+            onAddRecipeClick = {
+                navController.navigate(RecipeFormDestination)
+            },
             onRecipeClick = {},
             onAccountClick = {},
+        )
+
+        //Form Screen
+        recipeFormScreen(
+            onBackClick = {
+                navController.navigateUp()
+            },
+            onRecipeSaved = {
+                navController.navigateUp()
+            }
         )
     }
 }

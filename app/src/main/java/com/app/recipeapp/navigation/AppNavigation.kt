@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import com.app.recipeapp.data.local.preferences.UserPreferences
 import com.app.recipeapp.presentation.login.LoginDestination
 import com.app.recipeapp.presentation.login.loginScreen
+import com.app.recipeapp.presentation.mainFlow.recipes.RecipesNavGraph
 import com.app.recipeapp.presentation.mainFlow.recipes.recipeList.RecipeListDestination
 import com.app.recipeapp.presentation.mainFlow.recipes.recipesGraph
 import com.app.recipeapp.presentation.splash.SplashDestination
@@ -18,7 +19,7 @@ fun AppNavigation(
 ){
     NavHost(
         navController = navController,
-        startDestination = SplashDestination
+        startDestination = RecipesNavGraph
     ){
         splashScreen(
             navController = navController,

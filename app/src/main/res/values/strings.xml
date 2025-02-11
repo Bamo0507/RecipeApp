@@ -9,4 +9,20 @@
 
     <!-- Strings 4 the Loading Screen -->
     <string name = "loading">Cooking up something delicious...</string>
+
+    <!-- Strings for list screen -->
+    <string name = "listScreenTitle">Recipes</string>
+    <string name = "searchBar">Search Recipes</string>
+    <string name = "filterAll">All</string>
+    <string name ="filterFavs">Favorites</string>
+    <string name = "filterPrep">PrepTime</string>
+
+    <!-- Strings for Form -->
+    <string name = "newRecipe">New Recipe</string>
+    <string name="recipeTitle">Title</string>
+    <string name="recipeDesc">Description</string>
+    <string name="recipePrep">Preparation Time (min)</string>
+    <string name="recipeFav">Favorite</string>
+    <string name="recipeImage">Select Image</string>
+    <string name="recipeSave">Save Recipe</string>
 </resources>

@@ -101,7 +101,7 @@ fun loginScreen(
             ) {
                 // Main Image
                 Image(
-                    painter = painterResource(id = R.drawable.logbackground), // Your image
+                    painter = painterResource(id = R.drawable.logbackground),
                     contentDescription = "Background Image",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier.fillMaxSize()
@@ -135,7 +135,7 @@ fun loginScreen(
                 )
             }
 
-            //Outlined Text Boxes
+            //Outlined Text Boxes 4 pasword and email
             OutlinedTextField(
                 value = state.email,
                 onValueChange = { onNameChange(it) },
@@ -147,8 +147,6 @@ fun loginScreen(
                     .padding(horizontal = 24.dp, vertical = 8.dp),
                 shape = RoundedCornerShape(8.dp)
             )
-
-            // Password Text Field
             OutlinedTextField(
                 value = state.password,
                 onValueChange = { onPasswordChange(it) },
@@ -162,7 +160,7 @@ fun loginScreen(
                 shape = RoundedCornerShape(8.dp),
             )
 
-            // Just to make it more appealing :)
+
             Spacer(modifier = Modifier.height(26.dp))
 
             //Button 2 login
@@ -220,10 +218,10 @@ private fun loginScreenPreview() {
         Surface {
             loginScreen(
                 modifier = Modifier.fillMaxSize(),
-                state = LoginState(email = "", password = ""), // Mock state
-                onNameChange = {}, // Dummy function
-                onPasswordChange = {}, // Dummy function
-                onLogIn = {} // Dummy function
+                state = LoginState(email = "", password = ""),
+                onNameChange = {},
+                onPasswordChange = {},
+                onLogIn = {}
             )
         }
     }
@@ -236,10 +234,10 @@ private fun loginScreenErrorPreview() {
         Surface {
             loginScreen(
                 modifier = Modifier.fillMaxSize(),
-                state = LoginState(email = "", password = "", showError = true), // Mock state
-                onNameChange = {}, // Dummy function
-                onPasswordChange = {}, // Dummy function
-                onLogIn = {} // Dummy function
+                state = LoginState(email = "", password = "", showError = true),
+                onNameChange = {},
+                onPasswordChange = {},
+                onLogIn = {}
             )
         }
     }

@@ -41,6 +41,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -55,6 +56,7 @@ import com.app.recipeapp.data.local.room.repository.RecipeRepository
 import com.app.recipeapp.data.model.Recipe
 import com.app.recipeapp.presentation.mainFlow.recipes.recipeList.RecipeListViewModel
 import com.app.recipeapp.ui.theme.RecipeAppTheme
+import com.app.recipeapp.R
 
 @Composable
 fun RecipeListRoute(
@@ -114,7 +116,7 @@ fun RecipeListScreen(
                     ) {
                         Box(modifier = Modifier.weight(0.3f))
                         Spacer(modifier = Modifier.weight(1f))
-                        Text(text = "Recipes",
+                        Text(text = stringResource(R.string.listScreenTitle),
                             style = MaterialTheme.typography.headlineMedium,
                             fontWeight = FontWeight.Bold)
                         Spacer(modifier = Modifier.weight(1f))
@@ -157,7 +159,7 @@ fun RecipeListScreen(
                     .height(56.dp),
                 placeholder = {
                     Text(
-                        text = "Search Recipes",
+                        text = stringResource(R.string.searchBar),
                         style = MaterialTheme.typography.bodyLarge.copy(color = MaterialTheme.colorScheme.onSurface)
                     )
                 },
@@ -182,17 +184,17 @@ fun RecipeListScreen(
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
                 FilterText(
-                    text = "All",
+                    text = stringResource(R.string.filterAll),
                     selected = state.filter == "All",
                     onClick = onFilterAll
                 )
                 FilterText(
-                    text = "Favorites",
+                    text = stringResource(R.string.filterFavs),
                     selected = state.filter == "Favorites",
                     onClick = onFilterToFavs
                 )
                 FilterText(
-                    text = "PrepTime",
+                    text = stringResource(R.string.filterPrep),
                     selected = state.filter == "PrepTime",
                     onClick = onFilterToPrepTime
                 )
@@ -271,13 +273,18 @@ fun RecipeGridItem(
                     .height(150.dp)
             ) {
                 AsyncImage(
-                    model = if (recipe.imagePath.startsWith("file://") || recipe.imagePath.startsWith("http"))
-                        recipe.imagePath
-                    else
-                        "file://${recipe.imagePath}", 
-                    contentDescription = recipe.title,
+                    //TODO: refactor this 
+                    model = when {
+                        recipe.imagePath.startsWith("http") -> recipe.imagePath
+                        recipe.imagePath.startsWith("file://") -> recipe.imagePath
+                        recipe.imagePath.startsWith("content://") -> recipe.imagePath
+                        else -> "file://${recipe.imagePath}"
+                    },
+                    contentDescription = "Imagen seleccionada",
                     contentScale = ContentScale.Crop,
-                    modifier = Modifier.fillMaxSize()
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(200.dp)
                 )
                 IconButton(
                     onClick = onFavoriteClick,

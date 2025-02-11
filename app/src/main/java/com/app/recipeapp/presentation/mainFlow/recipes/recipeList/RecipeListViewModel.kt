@@ -1,5 +1,6 @@
 package com.app.recipeapp.presentation.mainFlow.recipes.recipeList
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -27,12 +28,11 @@ class RecipeListViewModel(
             // Start loading
             _uiState.update { it.copy(isLoading = true) }
 
-            delay(1500) // Simulate loading delay
-
             val recipeListFromRepo = recipeRepository.getAllRecipes()
 
             // Map repository objects to your Recipe model
             val recipes = recipeListFromRepo.map {
+                Log.d("RecipeList", "Image path: ${it.imagePath}") // Llamada correcta antes de construir el objeto
                 Recipe(
                     id = it.id,
                     title = it.title,
@@ -58,7 +58,6 @@ class RecipeListViewModel(
     fun updateFavorite(id: Int, favorite: Boolean) {
         viewModelScope.launch {
             recipeRepository.updateFavoriteStatus(id, favorite)
-            delay(1000) // Allow time for update
             getAllRecipes() // Re-fetch recipes (which will also reapply filters)
         }
     }
