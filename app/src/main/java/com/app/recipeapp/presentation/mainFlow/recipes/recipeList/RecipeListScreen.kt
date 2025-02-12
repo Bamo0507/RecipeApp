@@ -1,6 +1,7 @@
 package com.app.recipeapp.presentation.mainFlow.recipes.recipeList
 
 import android.content.res.Configuration
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -41,6 +42,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontWeight
@@ -272,20 +274,32 @@ fun RecipeGridItem(
                     .fillMaxWidth()
                     .height(150.dp)
             ) {
-                AsyncImage(
-                    //TODO: refactor this 
-                    model = when {
-                        recipe.imagePath.startsWith("http") -> recipe.imagePath
-                        recipe.imagePath.startsWith("file://") -> recipe.imagePath
-                        recipe.imagePath.startsWith("content://") -> recipe.imagePath
-                        else -> "file://${recipe.imagePath}"
-                    },
-                    contentDescription = "image selected",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(200.dp)
-                )
+                if(recipe.imagePath != ""){
+                    AsyncImage(
+                        //TODO: refactor this
+                        model = when {
+                            recipe.imagePath.startsWith("http") -> recipe.imagePath
+                            recipe.imagePath.startsWith("file://") -> recipe.imagePath
+                            recipe.imagePath.startsWith("content://") -> recipe.imagePath
+                            else -> "file://${recipe.imagePath}"
+                        },
+                        contentDescription = "image selected",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(200.dp)
+                    )
+                } else {
+                    Image(
+                        painterResource(R.drawable.list_image),
+                        contentDescription = "Stock image if filepath not found",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(200.dp)
+                    )
+                }
+
                 IconButton(
                     onClick = onFavoriteClick,
                     modifier = Modifier
