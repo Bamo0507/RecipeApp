@@ -69,6 +69,11 @@ class AccountViewModel(
     fun setLogoAccount(filepath: String){
         viewModelScope.launch {
             userPreferences.setLogoAccount(filepath)
+            _uiState.update { state ->
+                state.copy(
+                    filepath = filepath
+                )
+            }
         }
     }
 

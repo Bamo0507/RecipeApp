@@ -29,9 +29,6 @@ class LoginViewModel(
                 )
             }
 
-            //Delay time 4 verifying
-            delay(2000)
-
             if(loginRepository.login(_uiState.value.email, _uiState.value.password)){
                 userPreferences.setUserName(_uiState.value.email)
                 val username = _uiState.value.email

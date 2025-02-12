@@ -20,6 +20,7 @@ import androidx.navigation.NavController
 import com.app.recipeapp.data.local.preferences.UserPreferences
 import com.app.recipeapp.presentation.login.LoginDestination
 import com.app.recipeapp.presentation.mainFlow.recipes.RecipesNavGraph
+import com.app.recipeapp.presentation.reusableScreens.RecipeLoadingScreen
 
 @Composable
 fun SplashRoute (navController: NavController,
@@ -68,15 +69,6 @@ fun SplashScreen(
     }
 
     if (state.isLoading) {
-        Box(
-            modifier = modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center
-        ) {
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                CircularProgressIndicator()
-                Spacer(modifier = Modifier.height(16.dp))
-                Text("Verificando Login...")
-            }
-        }
+        RecipeLoadingScreen()
     }
 }

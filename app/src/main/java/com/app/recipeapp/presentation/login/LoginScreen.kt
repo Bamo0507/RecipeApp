@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
@@ -97,7 +98,7 @@ fun loginScreen(
         ){
             // Background image with text at the bottom
             Box(
-                modifier = Modifier.weight(0.45f)
+                modifier = Modifier.fillMaxWidth().height(500.dp)
             ) {
                 // Main Image
                 Image(
@@ -165,7 +166,11 @@ fun loginScreen(
 
             //Button 2 login
             Button(
-                onClick = { onLogIn() },
+                onClick = if(state.email != "" && state.password != ""){
+                    { onLogIn() }
+                } else {
+                    {}
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 24.dp),
@@ -192,21 +197,23 @@ fun loginScreen(
                     color = MaterialTheme.colorScheme.error,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 12.dp),
+                        .padding(start = 16.dp, end = 16.dp,top = 12.dp),
                     textAlign = TextAlign.Center
                 )
             }
 
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(8.dp))
 
             Text(
                 text = stringResource(R.string.loginFooter),
                 color = MaterialTheme.colorScheme.onSurface,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(bottom = 12.dp),
+                    .padding(start = 16.dp, end = 16.dp, bottom = 12.dp),
                 textAlign = TextAlign.Center
             )
+
+            Spacer(modifier = Modifier.height(6.dp))
         }
     }
 }
