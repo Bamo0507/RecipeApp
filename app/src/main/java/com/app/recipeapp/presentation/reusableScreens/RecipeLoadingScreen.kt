@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.app.recipeapp.ui.theme.RecipeAppTheme
@@ -58,18 +59,20 @@ fun RecipeLoadingScreen(modifier: Modifier = Modifier) {
                 modifier = Modifier
                     .size(100.dp)
                     .graphicsLayer(rotationZ = rotation),
-                tint = MaterialTheme.colorScheme.primary
+                tint = MaterialTheme.colorScheme.inversePrimary
             )
             Spacer(modifier = Modifier.height(24.dp))
             CircularProgressIndicator(
-                color = MaterialTheme.colorScheme.primary,
+                color = MaterialTheme.colorScheme.inversePrimary,
                 strokeWidth = 4.dp
             )
             Spacer(modifier = Modifier.height(24.dp))
             Text(
                 text = stringResource(R.string.loading),
                 style = MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.onBackground
+                color = MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
+                textAlign = TextAlign.Center
             )
         }
     }

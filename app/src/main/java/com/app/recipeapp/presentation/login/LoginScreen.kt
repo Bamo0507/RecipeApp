@@ -186,7 +186,7 @@ fun loginScreen(
                         modifier = Modifier.height(42.dp)){
                         Text(
                             text = stringResource(R.string.loginButton),
-                            style = MaterialTheme.typography.titleLarge,
+                            style = MaterialTheme.typography.headlineSmall,
                             fontWeight = FontWeight.Bold
                         )
                     }
@@ -211,7 +211,7 @@ fun loginScreen(
                     color = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(start = 16.dp, end = 16.dp, bottom = 12.dp),
+                        .padding(start = 24.dp, end = 24.dp, bottom = 12.dp),
                     textAlign = TextAlign.Center
                 )
 
