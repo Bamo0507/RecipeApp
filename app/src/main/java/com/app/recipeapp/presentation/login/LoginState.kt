@@ -6,4 +6,5 @@ data class LoginState(
     var showError: Boolean = false,
     var isLoading: Boolean = false,
     var loginSuccess: Boolean = false,
+    var passVisible: Boolean = false
 )

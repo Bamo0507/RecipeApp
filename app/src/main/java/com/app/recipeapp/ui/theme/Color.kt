@@ -135,24 +135,23 @@ val surfaceContainerHighestLightHighContrast = Color(0xFFFFD180)
 // ====================
 // ALTERNATIVE DARK THEME
 // ====================
-
 // Default Dark Mode
-val primaryDark = Color(0xFFEF6C00)                // Naranja profundo
-val onPrimaryDark = Color(0xFFFAFAFA)              // Texto claro sobre primary
-val primaryContainerDark = Color(0xFFFFCC80)       // Contenedor en naranja suave
-val onPrimaryContainerDark = Color(0xFF4E342E)     // Texto marrón oscuro
+val primaryDark = Color(0xFF6D4C41)                // Cacao oscuro
+val onPrimaryDark = Color(0xFFFFF3E0)              // Crema claro
+val primaryContainerDark = Color(0xFF5D4037)       // Marrón intenso
+val onPrimaryContainerDark = Color(0xFFFFE0B2)     // Beige suave
 
-val secondaryDark = Color(0xFF388E3C)              // Verde intenso y profundo
+val secondaryDark = Color(0xFF388E3C)              // Verde albahaca
 val onSecondaryDark = Color(0xFFE8F5E9)            // Texto muy claro
-val secondaryContainerDark = Color(0xFF66BB6A)       // Verde medio
-val onSecondaryContainerDark = Color(0xFF1B5E20)     // Verde oscuro para el texto
+val secondaryContainerDark = Color(0xFF66BB6A)     // Verde medio
+val onSecondaryContainerDark = Color(0xFF1B5E20)   // Verde oscuro para el texto
 
-val tertiaryDark = Color(0xFF8D6E63)               // Marrón terroso (evoca especias)
+val tertiaryDark = Color(0xFF8D6E63)               // Marrón terroso (especias)
 val onTertiaryDark = Color(0xFFFFF3E0)             // Texto en tono crema
-val tertiaryContainerDark = Color(0xFF795548)      // Contenedor marrón intenso
+val tertiaryContainerDark = Color(0xFF5D4037)      // Contenedor marrón intenso
 val onTertiaryContainerDark = Color(0xFFFFF8E1)    // Texto suave
 
-val errorDark = Color(0xFFCF6679)                  // Error (se mantiene similar)
+val errorDark = Color(0xFFCF6679)                  // Error
 val onErrorDark = Color(0xFF000000)
 val errorContainerDark = Color(0xFFB00020)
 val onErrorContainerDark = Color(0xFFFFCDD2)
@@ -161,14 +160,14 @@ val backgroundDark = Color(0xFF1B1B1B)             // Fondo oscuro (charcoal)
 val onBackgroundDark = Color(0xFFE0E0E0)
 val surfaceDark = Color(0xFF2C2C2C)                // Superficie un poco más clara
 val onSurfaceDark = Color(0xFFE0E0E0)
-val surfaceVariantDark = Color(0xFF3A3A3A)         // Variante para tarjetas y elevaciones
+val surfaceVariantDark = Color(0xFF3A3A3A)         // Variante para tarjetas
 val onSurfaceVariantDark = Color(0xFFC7C7C7)
 val outlineDark = Color(0xFF8A8A8A)
 val outlineVariantDark = Color(0xFF9E9E9E)
 val scrimDark = Color(0xFF000000)
 val inverseSurfaceDark = Color(0xFFE0E0E0)
 val inverseOnSurfaceDark = Color(0xFF1B1B1B)
-val inversePrimaryDark = Color(0xFFFFA726)         // Versión más clara del primary
+val inversePrimaryDark = Color(0xFFA1887F)         // Marrón más claro (sombra cálida)
 val surfaceDimDark = Color(0xFF232323)
 val surfaceBrightDark = Color(0xFF333333)
 val surfaceContainerLowestDark = Color(0xFF1B1B1B)
@@ -180,10 +179,10 @@ val surfaceContainerHighestDark = Color(0xFF3A3A3A)
 
 // ----- DARK THEME – MEDIUM CONTRAST -----
 
-val primaryDarkMediumContrast = Color(0xFFFF9800)
+val primaryDarkMediumContrast = Color(0xFF8D6E63)  // Chocolate medio
 val onPrimaryDarkMediumContrast = Color(0xFF212121)
-val primaryContainerDarkMediumContrast = Color(0xFFFFCC80)
-val onPrimaryContainerDarkMediumContrast = Color(0xFF4E342E)
+val primaryContainerDarkMediumContrast = Color(0xFF6D4C41)
+val onPrimaryContainerDarkMediumContrast = Color(0xFFFFE0B2)
 
 val secondaryDarkMediumContrast = Color(0xFF43A047)
 val onSecondaryDarkMediumContrast = Color(0xFFE8F5E9)
@@ -192,7 +191,7 @@ val onSecondaryContainerDarkMediumContrast = Color(0xFF1B5E20)
 
 val tertiaryDarkMediumContrast = Color(0xFF8D6E63)
 val onTertiaryDarkMediumContrast = Color(0xFFFFF3E0)
-val tertiaryContainerDarkMediumContrast = Color(0xFF795548)
+val tertiaryContainerDarkMediumContrast = Color(0xFF5D4037)
 val onTertiaryContainerDarkMediumContrast = Color(0xFFFFF8E1)
 
 val errorDarkMediumContrast = Color(0xFFCF6679)
@@ -223,10 +222,10 @@ val surfaceContainerHighestDarkMediumContrast = surfaceContainerHighestDark
 
 // ----- DARK THEME – HIGH CONTRAST -----
 
-val primaryDarkHighContrast = Color(0xFFFFC107)
+val primaryDarkHighContrast = Color(0xFFBCAAA4)   // Marrón suave
 val onPrimaryDarkHighContrast = Color(0xFF212121)
-val primaryContainerDarkHighContrast = Color(0xFFFFD54F)
-val onPrimaryContainerDarkHighContrast = Color(0xFF4E342E)
+val primaryContainerDarkHighContrast = Color(0xFF8D6E63)
+val onPrimaryContainerDarkHighContrast = Color(0xFFFFF8E1)
 
 val secondaryDarkHighContrast = Color(0xFF43A047)
 val onSecondaryDarkHighContrast = Color(0xFFE8F5E9)
@@ -235,7 +234,7 @@ val onSecondaryContainerDarkHighContrast = Color(0xFF1B5E20)
 
 val tertiaryDarkHighContrast = Color(0xFF8D6E63)
 val onTertiaryDarkHighContrast = Color(0xFFFFF3E0)
-val tertiaryContainerDarkHighContrast = Color(0xFF795548)
+val tertiaryContainerDarkHighContrast = Color(0xFF5D4037)
 val onTertiaryContainerDarkHighContrast = Color(0xFFFFF8E1)
 
 val errorDarkHighContrast = Color(0xFFCF6679)

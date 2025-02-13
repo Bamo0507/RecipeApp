@@ -71,6 +71,15 @@ class LoginViewModel(
         }
     }
 
+    //Password Visibility
+    fun onPassClick(){
+        _uiState.update { state ->
+            state.copy(
+                passVisible = !_uiState.value.passVisible
+            )
+        }
+    }
+
     //Factory to inject UserPreferences
     companion object {
         class Factory(

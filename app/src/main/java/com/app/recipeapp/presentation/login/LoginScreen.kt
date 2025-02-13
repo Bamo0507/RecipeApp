@@ -17,9 +17,12 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
@@ -39,6 +42,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -76,7 +80,8 @@ fun loginRoute(
         state = state,
         onNameChange = { viewModel.onEmailChanged(it) },
         onPasswordChange = {viewModel.onPassChanged(it)},
-        onLogIn = {viewModel.onLoginClick()}
+        onLogIn = {viewModel.onLoginClick()},
+        onPassVisible = {viewModel.onPassClick()}
     )
 }
 
@@ -86,7 +91,8 @@ fun loginScreen(
     state: LoginState,
     onNameChange: (String) -> Unit,
     onPasswordChange: (String) -> Unit,
-    onLogIn: () -> Unit
+    onLogIn: () -> Unit,
+    onPassVisible: () -> Unit
 ){
     if(state.isLoading){
         RecipeLoadingScreen()
@@ -98,7 +104,7 @@ fun loginScreen(
             ){
                 // Background image with text at the bottom
                 Box(
-                    modifier = Modifier.fillMaxWidth().height(400.dp)
+                    modifier = Modifier.fillMaxWidth().height(350.dp)
                 ) {
                     // Main Image
                     Image(
@@ -155,14 +161,21 @@ fun loginScreen(
                     label = { Text("Password") },
                     placeholder = { Text("pass123") },
                     leadingIcon = { Icon(Icons.Default.Lock, contentDescription = null) },
-                    visualTransformation = PasswordVisualTransformation(),
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 24.dp, vertical = 4.dp),
+                    visualTransformation = if (state.passVisible) VisualTransformation.None else PasswordVisualTransformation(),
                     shape = RoundedCornerShape(8.dp),
-                    singleLine = true
-                )
+                    singleLine = true,
+                    trailingIcon = {
+                        val image = if (state.passVisible) Icons.Filled.Visibility else Icons.Filled.VisibilityOff
+                        val description = if (state.passVisible) "Hide password" else "Show password"
 
+                        IconButton(onClick = {onPassVisible()}) {
+                            Icon(image, contentDescription = description)
+                        }
+                    }
+                )
 
                 Spacer(modifier = Modifier.height(26.dp))
 
@@ -232,7 +245,8 @@ private fun loginScreenPreview() {
                 state = LoginState(email = "", password = ""),
                 onNameChange = {},
                 onPasswordChange = {},
-                onLogIn = {}
+                onLogIn = {},
+                onPassVisible = {}
             )
         }
     }
@@ -248,7 +262,8 @@ private fun loginScreenErrorPreview() {
                 state = LoginState(email = "", password = "", showError = true),
                 onNameChange = {},
                 onPasswordChange = {},
-                onLogIn = {}
+                onLogIn = {},
+                onPassVisible = {}
             )
         }
     }
@@ -264,7 +279,8 @@ private fun loginScreenDarkPreview() {
                 state = LoginState(email = "", password = ""),
                 onNameChange = {},
                 onPasswordChange = {},
-                onLogIn = {}
+                onLogIn = {},
+                onPassVisible = {}
             )
         }
     }
@@ -280,7 +296,8 @@ private fun loginScreenDarkErrorPreview() {
                 state = LoginState(email = "", password = "", showError = true),
                 onNameChange = {},
                 onPasswordChange = {},
-                onLogIn = {}
+                onLogIn = {},
+                onPassVisible = {}
             )
         }
     }
