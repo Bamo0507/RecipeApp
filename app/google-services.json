@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "49897746601",
+    "project_id": "mealmap-3448f",
+    "storage_bucket": "mealmap-3448f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:49897746601:android:8c6ffb167e211067d3b9b8",
+        "android_client_info": {
+          "package_name": "com.app.recipeapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-V0eU69YMa6VpvUzHJbeVjGjEQ0kw4io"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
