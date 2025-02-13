@@ -198,7 +198,8 @@ fun RecipeProfileScreen(
                     Text(
                         text = state.recipe?.title ?: "Recipe Name",
                         style = MaterialTheme.typography.headlineMedium,
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Center
                     )
 
                     Spacer(modifier = Modifier.height(16.dp))
