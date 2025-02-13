@@ -199,7 +199,7 @@ fun loginScreen(
                         color = MaterialTheme.colorScheme.error,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(start = 16.dp, end = 16.dp,top = 12.dp),
+                            .padding(start = 22.dp, end = 22.dp,top = 12.dp),
                         textAlign = TextAlign.Center
                     )
                 }

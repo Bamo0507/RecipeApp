@@ -120,13 +120,14 @@ fun AccountScreen(
                 IconButton(
                     onClick = onBackClick,
                     modifier = Modifier
-                        .padding(16.dp)
-                        .background(MaterialTheme.colorScheme.surface, shape = CircleShape)
+                        .padding(vertical = 12.dp, horizontal = 10.dp)
+                        .background(MaterialTheme.colorScheme.surface, CircleShape)
                 ){
                     Icon(
                         imageVector = Icons.Filled.ArrowBackIos,
                         contentDescription = "go back",
-                        modifier = Modifier.padding(start = 8.dp)
+                        modifier = Modifier.padding(start = 8.dp).size(22.dp),
+                        tint = MaterialTheme.colorScheme.onPrimary
                     )
                 }
 
@@ -190,23 +191,24 @@ fun AccountScreen(
                             )
                         }
                     }
-
+                    Spacer(modifier = Modifier.height(8.dp))
                     Text(
                         text = state.userName,
-                        style = MaterialTheme.typography.headlineMedium,
+                        style = MaterialTheme.typography.headlineSmall,
                         fontWeight = FontWeight.Bold,
                         color = MaterialTheme.colorScheme.onPrimary,
                         modifier = Modifier.padding(top = 8.dp)
                     )
+                    Spacer(modifier = Modifier.height(8.dp))
                 }
             }
 
-            Spacer(modifier = Modifier.height(88.dp))
+            Spacer(modifier = Modifier.height(96.dp))
 
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(horizontal = 24.dp, vertical = 16.dp),
+                    .padding(horizontal = 12.dp, vertical = 12.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 AccountOption(
@@ -216,6 +218,7 @@ fun AccountScreen(
                 ) {
                     onLogOutClick()
                 }
+
             }
         }
 
@@ -239,7 +242,7 @@ fun AccountOption(
         modifier = Modifier
             .fillMaxWidth()
             .clickable { navAction() }
-            .padding(horizontal = 12.dp, vertical = 8.dp)
+            .padding(horizontal = 6.dp, vertical = 6.dp)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,

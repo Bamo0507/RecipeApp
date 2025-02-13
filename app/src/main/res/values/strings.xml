@@ -31,4 +31,7 @@
 
     <!-- Strings for logout screen -->
     <string name="logoutScreen">Log Out</string>
+
+    <!-- Strings for profile screen -->
+    <string name="profileDesc">Description</string>
 </resources>
