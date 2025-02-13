@@ -86,7 +86,6 @@ La estructura del proyecto está organizada en varios paquetes para separar las 
 1. **Clonar el repositorio:**
 
 ```
-git clone https://github.com/tu_usuario/recipe-app.git
-cd recipe-app
+git clone https://github.com/Bamo0507/RecipeApp.git
 ```
 
