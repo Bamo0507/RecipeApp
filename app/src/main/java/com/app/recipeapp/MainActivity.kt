@@ -2,6 +2,7 @@ package com.app.recipeapp
 
 import android.content.Context
 import android.os.Bundle
+import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -14,11 +15,14 @@ import com.app.recipeapp.data.local.preferences.DataStoreUserPrefs
 import com.app.recipeapp.navigation.AppNavigation
 import com.app.recipeapp.ui.theme.RecipeAppTheme
 
+
 class MainActivity : ComponentActivity() {
     private val Context.dataStore by preferencesDataStore(name = "user_prefs")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val userPreferences = DataStoreUserPrefs(dataStore)
+        window.decorView.systemUiVisibility = (
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
         enableEdgeToEdge()
         setContent {
             val navController = rememberNavController()
@@ -26,7 +30,8 @@ class MainActivity : ComponentActivity() {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     AppNavigation(
                         navController = navController,
-                        userPreferences = userPreferences
+                        userPreferences = userPreferences,
+
                     )
                 }
             }

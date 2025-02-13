@@ -1,6 +1,7 @@
 package com.app.recipeapp.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.app.recipeapp.data.local.preferences.UserPreferences
@@ -15,7 +16,7 @@ import com.app.recipeapp.presentation.splash.splashScreen
 @Composable
 fun AppNavigation(
     navController: NavHostController,
-    userPreferences: UserPreferences
+    userPreferences: UserPreferences,
 ){
     NavHost(
         navController = navController,

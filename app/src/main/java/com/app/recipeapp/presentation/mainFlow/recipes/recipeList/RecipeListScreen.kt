@@ -276,7 +276,6 @@ fun RecipeGridItem(
             ) {
                 if(recipe.imagePath != ""){
                     AsyncImage(
-                        //TODO: refactor this
                         model = when {
                             recipe.imagePath.startsWith("http") -> recipe.imagePath
                             recipe.imagePath.startsWith("file://") -> recipe.imagePath

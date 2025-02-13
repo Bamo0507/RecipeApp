@@ -30,9 +30,9 @@ class RecipeListViewModel(
 
             val recipeListFromRepo = recipeRepository.getAllRecipes()
 
-            // Map repository objects to your Recipe model
+            // Map repository objects to Recipe model
             val recipes = recipeListFromRepo.map {
-                Log.d("RecipeList", "Image path: ${it.imagePath}") // Llamada correcta antes de construir el objeto
+                Log.d("RecipeList", "Image path: ${it.imagePath}")
                 Recipe(
                     id = it.id,
                     title = it.title,

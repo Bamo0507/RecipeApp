@@ -22,6 +22,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -29,9 +30,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.blur
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -93,129 +91,135 @@ fun loginScreen(
     if(state.isLoading){
         RecipeLoadingScreen()
     } else{
-        Column(
-            modifier = modifier.fillMaxSize()
-        ){
-            // Background image with text at the bottom
-            Box(
-                modifier = Modifier.fillMaxWidth().height(500.dp)
-            ) {
-                // Main Image
-                Image(
-                    painter = painterResource(id = R.drawable.logbackground),
-                    contentDescription = "Background Image",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier.fillMaxSize()
-                )
-
-                // Blurred effect at the bottom
+        Scaffold { paddingValues ->
+            Column(
+                modifier = modifier.fillMaxSize()
+                    .padding(paddingValues)
+            ){
+                // Background image with text at the bottom
                 Box(
-                    modifier = Modifier
-                        .align(Alignment.BottomCenter)
-                        .fillMaxWidth()
-                        .height(150.dp)
-                        .background(
-                            Brush.verticalGradient(
-                                colors = listOf(
-                                    Color.Transparent,
-                                    MaterialTheme.colorScheme.surface
+                    modifier = Modifier.fillMaxWidth().height(400.dp)
+                ) {
+                    // Main Image
+                    Image(
+                        painter = painterResource(id = R.drawable.logbackground),
+                        contentDescription = "Background Image",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier.fillMaxSize()
+                    )
+
+                    // Blurred effect at the bottom
+                    Box(
+                        modifier = Modifier
+                            .align(Alignment.BottomCenter)
+                            .fillMaxWidth()
+                            .height(150.dp)
+                            .background(
+                                Brush.verticalGradient(
+                                    colors = listOf(
+                                        Color.Transparent,
+                                        MaterialTheme.colorScheme.surface
+                                    )
                                 )
                             )
-                        )
-                )
+                    )
 
-                // Text positioned in the bottom-left corner
-                Text(
-                    text = stringResource(R.string.login),
-                    style = MaterialTheme.typography.headlineMedium,
-                    color = MaterialTheme.colorScheme.onSurface,
-                    modifier = Modifier
-                        .align(Alignment.BottomStart)
-                        .padding(start = 26.dp, bottom = 18.dp),
-                    fontWeight = FontWeight.Bold
-                )
-            }
-
-            //Outlined Text Boxes 4 pasword and email
-            OutlinedTextField(
-                value = state.email,
-                onValueChange = { onNameChange(it) },
-                label = { Text("Email Address") },
-                leadingIcon = { Icon(Icons.Default.Email, contentDescription = null) },
-                placeholder = { Text("username@gmail.com") },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 24.dp, vertical = 8.dp),
-                shape = RoundedCornerShape(8.dp)
-            )
-            OutlinedTextField(
-                value = state.password,
-                onValueChange = { onPasswordChange(it) },
-                label = { Text("Password") },
-                placeholder = { Text("pass123") },
-                leadingIcon = { Icon(Icons.Default.Lock, contentDescription = null) },
-                visualTransformation = PasswordVisualTransformation(),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 24.dp, vertical = 8.dp),
-                shape = RoundedCornerShape(8.dp),
-            )
-
-
-            Spacer(modifier = Modifier.height(26.dp))
-
-            //Button 2 login
-            Button(
-                onClick = if(state.email != "" && state.password != ""){
-                    { onLogIn() }
-                } else {
-                    {}
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 24.dp),
-                shape = RoundedCornerShape(14.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = MaterialTheme.colorScheme.primary,
-                    contentColor = MaterialTheme.colorScheme.onPrimary
-                )
-            ) {
-                Box(contentAlignment = Alignment.Center,
-                    modifier = Modifier.height(42.dp)){
+                    // Text positioned in the bottom-left corner
                     Text(
-                        text = stringResource(R.string.loginButton),
-                        style = MaterialTheme.typography.titleLarge,
+                        text = stringResource(R.string.login),
+                        style = MaterialTheme.typography.headlineMedium,
+                        color = MaterialTheme.colorScheme.onSurface,
+                        modifier = Modifier
+                            .align(Alignment.BottomStart)
+                            .padding(start = 26.dp, bottom = 18.dp),
                         fontWeight = FontWeight.Bold
                     )
                 }
-            }
 
-            //Error message
-            if(state.showError){
-                Text(
-                    text = stringResource(R.string.loginError),
-                    color = MaterialTheme.colorScheme.error,
+                //Outlined Text Boxes 4 pasword and email
+                OutlinedTextField(
+                    value = state.email,
+                    onValueChange = { onNameChange(it) },
+                    label = { Text("Email Address") },
+                    leadingIcon = { Icon(Icons.Default.Email, contentDescription = null) },
+                    placeholder = { Text("username@gmail.com") },
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(start = 16.dp, end = 16.dp,top = 12.dp),
+                        .padding(horizontal = 24.dp, vertical = 4.dp),
+                    shape = RoundedCornerShape(8.dp),
+                    singleLine = true
+                )
+                OutlinedTextField(
+                    value = state.password,
+                    onValueChange = { onPasswordChange(it) },
+                    label = { Text("Password") },
+                    placeholder = { Text("pass123") },
+                    leadingIcon = { Icon(Icons.Default.Lock, contentDescription = null) },
+                    visualTransformation = PasswordVisualTransformation(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 24.dp, vertical = 4.dp),
+                    shape = RoundedCornerShape(8.dp),
+                    singleLine = true
+                )
+
+
+                Spacer(modifier = Modifier.height(26.dp))
+
+                //Button 2 login
+                Button(
+                    onClick = if(state.email != "" && state.password != ""){
+                        { onLogIn() }
+                    } else {
+                        {}
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 24.dp),
+                    shape = RoundedCornerShape(14.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.primary,
+                        contentColor = MaterialTheme.colorScheme.onPrimary
+                    )
+                ) {
+                    Box(contentAlignment = Alignment.Center,
+                        modifier = Modifier.height(42.dp)){
+                        Text(
+                            text = stringResource(R.string.loginButton),
+                            style = MaterialTheme.typography.titleLarge,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                }
+
+                //Error message
+                if(state.showError){
+                    Text(
+                        text = stringResource(R.string.loginError),
+                        color = MaterialTheme.colorScheme.error,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(start = 16.dp, end = 16.dp,top = 12.dp),
+                        textAlign = TextAlign.Center
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Text(
+                    text = stringResource(R.string.loginFooter),
+                    color = MaterialTheme.colorScheme.onSurface,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 16.dp, end = 16.dp, bottom = 12.dp),
                     textAlign = TextAlign.Center
                 )
+
+                Spacer(modifier = Modifier.height(6.dp))
             }
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            Text(
-                text = stringResource(R.string.loginFooter),
-                color = MaterialTheme.colorScheme.onSurface,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 16.dp, end = 16.dp, bottom = 12.dp),
-                textAlign = TextAlign.Center
-            )
-
-            Spacer(modifier = Modifier.height(6.dp))
         }
     }
+
 }
 
 @Preview(showBackground = true)

@@ -7,6 +7,7 @@ import android.content.res.Configuration
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -20,8 +21,17 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccessAlarm
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowBackIos
+import androidx.compose.material.icons.filled.Receipt
+import androidx.compose.material.icons.filled.ReceiptLong
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.TextFields
+import androidx.compose.material.icons.filled.Title
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -94,12 +104,15 @@ fun RecipeFormScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(stringResource(R.string.newRecipe)) },
+                title = { Text(
+                    text = stringResource(R.string.newRecipe),
+                    modifier = Modifier.padding(start = 4.dp)) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(
-                            imageVector = Icons.Default.ArrowBack,
-                            contentDescription = "Go back"
+                            imageVector = Icons.Default.ArrowBackIos,
+                            contentDescription = "Go back",
+                            modifier = Modifier.padding(start = 8.dp)
                         )
                     }
                 },
@@ -112,102 +125,155 @@ fun RecipeFormScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(paddingValues)
-                .padding(16.dp)
+                .padding(paddingValues),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             /*
             Set of outlined text fields for the forms
              */
-            OutlinedTextField(
-                value = state.title,
-                onValueChange = onTitleChange,
-                label = { Text(stringResource(R.string.recipeTitle)) },
-                isError = state.titleError != null,
-                modifier = Modifier.fillMaxWidth()
-            )
-            if (state.titleError != null) {
-                Text(
-                    text = state.titleError!!,
-                    color = MaterialTheme.colorScheme.error,
-                    style = MaterialTheme.typography.bodySmall
-                )
-            }
-            Spacer(modifier = Modifier.height(8.dp))
-
-            OutlinedTextField(
-                value = state.description,
-                onValueChange = onDescriptionChange,
-                label = { Text(stringResource(R.string.recipeDesc)) },
-                isError = state.descriptionError != null,
-                modifier = Modifier.fillMaxWidth()
-            )
-            if (state.descriptionError != null) {
-                Text(
-                    text = state.descriptionError!!,
-                    color = MaterialTheme.colorScheme.error,
-                    style = MaterialTheme.typography.bodySmall
-                )
-            }
-            Spacer(modifier = Modifier.height(8.dp))
-
-            OutlinedTextField(
-                value = state.prepTime,
-                onValueChange = onPrepTimeChange,
-                label = { Text(stringResource(R.string.recipePrep)) },
-                isError = state.prepTimeError != null,
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                modifier = Modifier.fillMaxWidth()
-            )
-            if (state.prepTimeError != null) {
-                Text(
-                    text = state.prepTimeError!!,
-                    color = MaterialTheme.colorScheme.error,
-                    style = MaterialTheme.typography.bodySmall
-                )
-            }
-            Spacer(modifier = Modifier.height(8.dp))
-
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Checkbox(
-                    checked = state.isFavorite,
-                    onCheckedChange = onToggleFavorite
-                )
-                Text(stringResource(R.string.recipeFav))
-            }
-
-            if (state.imagePath.isNotEmpty()) {
-                AsyncImage(
-                    model = when {
-                        state.imagePath.startsWith("http") -> state.imagePath
-                        state.imagePath.startsWith("file://") -> state.imagePath
-                        state.imagePath.startsWith("content://") -> state.imagePath
-                        else -> "file://${state.imagePath}"
-                    },
-                    contentDescription = "Image Selected",
-                    contentScale = ContentScale.Crop,
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp)
+            ){
+                OutlinedTextField(
+                    value = state.title,
+                    onValueChange = onTitleChange,
+                    label = { Text(stringResource(R.string.recipeTitle)) },
+                    isError = state.titleError != null,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(200.dp)
+                        .padding(vertical = 4.dp),
+                    trailingIcon = {
+                        Icon(
+                            imageVector = Icons.Default.Title,
+                            contentDescription = "Title Field",
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                    },
+                    singleLine = true
                 )
-                Spacer(modifier = Modifier.height(4.dp))
+                if (state.titleError != null) {
+                    Text(
+                        text = state.titleError!!,
+                        color = MaterialTheme.colorScheme.error,
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                }
+                Spacer(modifier = Modifier.height(8.dp))
 
+                OutlinedTextField(
+                    value = state.description,
+                    onValueChange = onDescriptionChange,
+                    label = { Text(stringResource(R.string.recipeDesc)) },
+                    isError = state.descriptionError != null,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 4.dp),
+                    trailingIcon = { Icon(
+                        imageVector = Icons.Default.TextFields,
+                        contentDescription = "Decription Field",
+                        tint = MaterialTheme.colorScheme.primary)
+                    },
+                    singleLine = true
+                )
+                if (state.descriptionError != null) {
+                    Text(
+                        text = state.descriptionError!!,
+                        color = MaterialTheme.colorScheme.error,
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                }
+                Spacer(modifier = Modifier.height(8.dp))
+
+                OutlinedTextField(
+                    value = state.prepTime,
+                    onValueChange = onPrepTimeChange,
+                    label = { Text(stringResource(R.string.recipePrep)) },
+                    isError = state.prepTimeError != null,
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 4.dp),
+                    trailingIcon = { Icon(
+                        imageVector = Icons.Default.AccessAlarm,
+                        contentDescription = "Prep Time Field",
+                        tint = MaterialTheme.colorScheme.primary)
+                    },
+                    singleLine = true
+                )
+                if (state.prepTimeError != null) {
+                    Text(
+                        text = state.prepTimeError!!,
+                        color = MaterialTheme.colorScheme.error,
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                }
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Checkbox(
+                        checked = state.isFavorite,
+                        onCheckedChange = onToggleFavorite
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(stringResource(R.string.recipeFav))
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+                Button(
+                    onClick = { imagePickerLauncher.launch("image/*") },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(8.dp),
+                    elevation = ButtonDefaults.buttonElevation(defaultElevation = 4.dp)
+                ) {
+                    Icon(imageVector = Icons.Default.Search, contentDescription = "Pick Image")
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(stringResource(R.string.recipeImage))
+                }
+
+                if (state.imagePath.isNotEmpty()) {
+                    Card(
+                        shape = RoundedCornerShape(12.dp),
+                        elevation = CardDefaults.cardElevation(4.dp),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 8.dp, horizontal = 12.dp)
+                    ) {
+                        AsyncImage(
+                            model = when {
+                                state.imagePath.startsWith("http") -> state.imagePath
+                                state.imagePath.startsWith("file://") -> state.imagePath
+                                state.imagePath.startsWith("content://") -> state.imagePath
+                                else -> "file://${state.imagePath}"
+                            },
+                            contentDescription = "Selected Image",
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(200.dp)
+                        )
+                    }
+                }
+
+                // Button for saving recipe
+                Button(
+                    onClick = onSaveRecipe,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(8.dp),
+                    elevation = ButtonDefaults.buttonElevation(defaultElevation = 4.dp)
+                ) {
+                    Icon(imageVector = Icons.Default.ReceiptLong, contentDescription = "Pick Image")
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(stringResource(R.string.recipeSave))
+                }
             }
 
-            // Button for adding image
-            Button(
-                onClick = { imagePickerLauncher.launch("image/*") },
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text(stringResource(R.string.recipeImage))
-            }
-            Spacer(modifier = Modifier.height(16.dp))
-            // Button for saving recipe
-            Button(
-                onClick = onSaveRecipe,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text(stringResource(R.string.recipeSave))
-            }
         }
     }
 }

@@ -30,6 +30,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -98,122 +99,128 @@ fun AccountScreen(
             savedPath?.let { changePath(it) }
         }
     }
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-    ) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(200.dp)
+
+    Scaffold { paddingValues ->
+        Column(
+            modifier = modifier
+                .fillMaxSize()
+                .padding(paddingValues)
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.account_background),
-                contentDescription = "City Background",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier.fillMaxSize()
-            )
-            IconButton(
-                onClick = onBackClick,
+            Box(
                 modifier = Modifier
-                    .padding(16.dp)
-                    .background(MaterialTheme.colorScheme.surface, shape = CircleShape)
-            ){
-                Icon(
-                    imageVector = Icons.Filled.ArrowBackIos,
-                    contentDescription = "go back",
-                    modifier = Modifier.padding(start = 8.dp)
-                )
-            }
-
-            Column(
-                modifier = Modifier
-                    .align(Alignment.BottomCenter)
-                    .offset(y = 90.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
+                    .fillMaxWidth()
+                    .height(200.dp)
             ) {
-                // Here i have to include the image
-                Box(
+                Image(
+                    painter = painterResource(id = R.drawable.log_background2),
+                    contentDescription = "City Background",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier.fillMaxSize()
+                )
+                IconButton(
+                    onClick = onBackClick,
                     modifier = Modifier
-                        .size(150.dp)
-                        .clip(CircleShape)
-                        .border(2.dp, Color.White, CircleShape)
-                        .clickable { imagePickerLauncher.launch("image/*") }
+                        .padding(16.dp)
+                        .background(MaterialTheme.colorScheme.surface, shape = CircleShape)
+                ){
+                    Icon(
+                        imageVector = Icons.Filled.ArrowBackIos,
+                        contentDescription = "go back",
+                        modifier = Modifier.padding(start = 8.dp)
+                    )
+                }
 
+                Column(
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .offset(y = 90.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    if (state.filepath == "") {
-                        Box(
-                            modifier = Modifier
-                                .clip(CircleShape)
-                                .background(Color.Gray),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Image(
-                                painter = painterResource(R.drawable.account_default),
-                                contentDescription = "Default image to show",
+                    // Here i have to include the image
+                    Box(
+                        modifier = Modifier
+                            .size(150.dp)
+                            .clip(CircleShape)
+                            .border(2.dp, Color.White, CircleShape)
+                            .clickable { imagePickerLauncher.launch("image/*") }
+
+                    ) {
+                        if (state.filepath == "") {
+                            Box(
+                                modifier = Modifier
+                                    .clip(CircleShape)
+                                    .background(Color.Gray),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Image(
+                                    painter = painterResource(R.drawable.account_default),
+                                    contentDescription = "Default image to show",
+                                    contentScale = ContentScale.Crop,
+                                    modifier = Modifier.fillMaxSize()
+                                )
+                                Box(
+                                    modifier = Modifier
+                                        .size(400.dp)
+                                        .background(Color.Black.copy(alpha = 0.6f), CircleShape)
+                                        .align(Alignment.Center),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Default.Edit,
+                                        contentDescription = "Edit profile image",
+                                        tint = Color.White,
+                                        modifier = Modifier.size(25.dp)
+                                    )
+                                }
+
+                            }
+
+
+                        } else {
+                            AsyncImage(
+                                model = when {
+                                    state.filepath.startsWith("http") -> state.filepath
+                                    state.filepath.startsWith("file://") -> state.filepath
+                                    state.filepath.startsWith("content://") -> state.filepath
+                                    else -> "file://${state.filepath}"
+                                },
+                                contentDescription = "Image Selected",
                                 contentScale = ContentScale.Crop,
                                 modifier = Modifier.fillMaxSize()
                             )
-                            Box(
-                                modifier = Modifier
-                                    .size(400.dp)
-                                    .background(Color.Black.copy(alpha = 0.6f), CircleShape)
-                                    .align(Alignment.Center),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Default.Edit,
-                                    contentDescription = "Edit profile image",
-                                    tint = Color.White,
-                                    modifier = Modifier.size(20.dp)
-                                )
-                            }
-
                         }
-
-
-                    } else {
-                        AsyncImage(
-                            model = when {
-                                state.filepath.startsWith("http") -> state.filepath
-                                state.filepath.startsWith("file://") -> state.filepath
-                                state.filepath.startsWith("content://") -> state.filepath
-                                else -> "file://${state.filepath}"
-                            },
-                            contentDescription = "Image Selected",
-                            contentScale = ContentScale.Crop,
-                            modifier = Modifier.fillMaxSize()
-                        )
                     }
+
+                    Text(
+                        text = state.userName,
+                        style = MaterialTheme.typography.headlineMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onPrimary,
+                        modifier = Modifier.padding(top = 8.dp)
+                    )
                 }
-
-                Text(
-                    text = state.userName,
-                    style = MaterialTheme.typography.headlineMedium,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onPrimary,
-                    modifier = Modifier.padding(top = 8.dp)
-                )
             }
-        }
 
-        Spacer(modifier = Modifier.height(88.dp))
+            Spacer(modifier = Modifier.height(88.dp))
 
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = 24.dp, vertical = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            AccountOption(
-                icon = Icons.Default.ExitToApp,
-                label = stringResource(id = R.string.logoutScreen),
-                iconTint = MaterialTheme.colorScheme.primary
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(horizontal = 24.dp, vertical = 16.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                onLogOutClick()
+                AccountOption(
+                    icon = Icons.Default.ExitToApp,
+                    label = stringResource(id = R.string.logoutScreen),
+                    iconTint = MaterialTheme.colorScheme.primary
+                ) {
+                    onLogOutClick()
+                }
             }
         }
+
     }
+
 }
 
 @Composable
