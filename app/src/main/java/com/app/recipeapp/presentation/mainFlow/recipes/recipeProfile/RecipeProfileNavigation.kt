@@ -15,7 +15,7 @@ data class RecipeProfileDestination(
 fun NavController.navigateToProfileScreen(
     destination: RecipeProfileDestination,
     navOptions: NavOptions? = null
-){
+) {
     this.navigate(
         destination,
         navOptions
@@ -24,9 +24,10 @@ fun NavController.navigateToProfileScreen(
 
 fun NavGraphBuilder.profileScreen(
     onNavigateBack: () -> Unit
-){
-    composable<RecipeProfileDestination>{ backStackEntry ->
+) {
+    composable<RecipeProfileDestination> { backStackEntry ->
         val destination: RecipeProfileDestination = backStackEntry.toRoute()
+
         RecipeProfileRoute(
             onBackClick = onNavigateBack,
             recipeId = destination.recipeId

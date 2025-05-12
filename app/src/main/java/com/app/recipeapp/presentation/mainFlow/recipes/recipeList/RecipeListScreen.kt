@@ -165,7 +165,7 @@ fun RecipeListScreen(
                 placeholder = {
                     Text(
                         text = stringResource(R.string.searchBar),
-                        style = MaterialTheme.typography.bodyLarge.copy(color = MaterialTheme.colorScheme.onSurface)
+                        style = MaterialTheme.typography.bodyLarge.copy(color = MaterialTheme.colorScheme.onSurface),
                     )
                 },
                 trailingIcon = {

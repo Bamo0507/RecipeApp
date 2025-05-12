@@ -28,5 +28,4 @@ class RecipeRepository(context: Context) {
         return recipeDao.updateFavoriteStatus(id, status)
     }
 
-
 }

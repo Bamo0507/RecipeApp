@@ -17,7 +17,7 @@ Una aplicación de recetas de cocina desarrollada en Android con Kotlin y Jetpac
 ## Características
 
 - **Inicio de Sesión:**  
-  - Validación de credenciales ("info@koalit.dev" / "koalit123").
+  - Validación de credenciales ("info@mobile.dev" / "mobile123") **con estas podrás iniciar sesión**.
   - Gestión de estado de sesión mediante DataStore.
 
 - **Recetas:**  

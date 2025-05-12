@@ -26,6 +26,7 @@ fun AppNavigation(
             navController = navController,
             userPrefs= userPreferences
         )
+
         loginScreen(
             onLoginClick = {
                 navController.navigate(RecipeListDestination) {

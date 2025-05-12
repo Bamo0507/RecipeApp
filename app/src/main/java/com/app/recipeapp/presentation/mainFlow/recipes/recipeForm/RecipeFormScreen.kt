@@ -282,6 +282,17 @@ fun RecipeFormScreen(
     }
 }
 
+fun copyImageToInternalStorage(context: Context, uri: Uri): String? {
+    val inputStream = context.contentResolver.openInputStream(uri) ?: return null
+    val file = File(context.filesDir, "recipe_${System.currentTimeMillis()}.jpg")
+
+    file.outputStream().use { outputStream ->
+        inputStream.copyTo(outputStream)
+    }
+
+    return file.absolutePath
+}
+
 @Preview(
     name = "RecipeFormScreen Preview - Light Mode",
     uiMode = Configuration.UI_MODE_NIGHT_NO,
@@ -311,17 +322,6 @@ fun RecipeFormScreenPreviewLight() {
             context = LocalContext.current
         )
     }
-}
-
-fun copyImageToInternalStorage(context: Context, uri: Uri): String? {
-    val inputStream = context.contentResolver.openInputStream(uri) ?: return null
-    val file = File(context.filesDir, "recipe_${System.currentTimeMillis()}.jpg")
-
-    file.outputStream().use { outputStream ->
-        inputStream.copyTo(outputStream)
-    }
-
-    return file.absolutePath
 }
 
 @Preview(

@@ -5,6 +5,6 @@ import kotlinx.coroutines.delay
 class LocalLoginRepository: LoginRepository {
     override suspend fun login(email: String, password: String): Boolean{
         delay(2000L)
-        return email == "info@koalit.dev" && password == "koalit123"
+        return email == "info@mobile.dev" && password == "mobile123"
     }
 }

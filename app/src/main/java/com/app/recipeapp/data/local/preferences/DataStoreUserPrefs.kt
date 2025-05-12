@@ -32,6 +32,7 @@ class DataStoreUserPrefs(
         }
     }
 
+    // Function para la lectura de LOGGED
     override fun loggedStatus(): Flow<Boolean> =
         dataStore.data.map { preferences ->
             preferences[loggedKey] ?: false
